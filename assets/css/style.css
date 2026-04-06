@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap");
+
 :root {
   --cream: #fcf485;
   --cream-soft: #fff9cc;
@@ -16,8 +18,8 @@
   --text: #1f1d17;
   --border: rgba(141, 43, 82, 0.14);
   --shadow: 0 16px 34px rgba(141, 43, 82, 0.12);
-  --font-title: "Bolero-esque Honora", Georgia, "Times New Roman", serif;
-  --font-content: "Darley Sans Regular", "Darley Sans", "Segoe UI", Arial, sans-serif;
+  --font-title: "Noto Serif", "Times New Roman", serif;
+  --font-content: "Be Vietnam Pro", "Segoe UI", Arial, sans-serif;
 }
 
 * {
@@ -31,7 +33,7 @@ html {
 body {
   margin: 0;
   color: var(--text);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-content);
   min-height: 100vh;
   display: flex;
   flex-direction: column;

@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeTargets = modal.querySelectorAll("[data-rule-modal-close]");
   let swiper = null;
   const imagePreloadCache = new Map();
+  const HOVER_SLIDE_DELAY_MS = 180;
 
   const backImageByGame = {
     "Ô Ăn Quan": "../MẶT SAU/MẶT SAU/Ô ĂN QUAN.png",
@@ -80,15 +81,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (backImagePath) {
         modalImage.classList.remove("is-ready");
+        modalImage.onload = () => {
+          modalImage.classList.add("is-ready");
+        };
+        modalImage.onerror = () => {
+          modalImage.classList.remove("is-ready");
+        };
         modalImage.src = backImagePath;
         modalImage.hidden = false;
         modalContent.hidden = true;
 
-        preloadImage(backImagePath).then(() => {
-          if (modalImage.src.includes(backImagePath)) {
-            modalImage.classList.add("is-ready");
-          }
-        });
+        preloadImage(backImagePath);
       } else {
         modalImage.removeAttribute("src");
         modalImage.classList.remove("is-ready");
@@ -110,11 +113,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const bindCardActions = () => {
     cards.forEach((card, index) => {
       const slide = card.closest(".swiper-slide");
+      let hoverTimer = null;
 
       if (slide) {
         slide.addEventListener("pointerenter", () => {
-          if (swiper && window.innerWidth >= 768 && swiper.activeIndex !== index) {
-            swiper.slideTo(index, 500);
+          if (!swiper || window.innerWidth < 768 || swiper.activeIndex === index) {
+            return;
+          }
+
+          hoverTimer = window.setTimeout(() => {
+            if (swiper && swiper.activeIndex !== index) {
+              swiper.slideTo(index, 500);
+            }
+          }, HOVER_SLIDE_DELAY_MS);
+        });
+
+        slide.addEventListener("pointerleave", () => {
+          if (hoverTimer) {
+            clearTimeout(hoverTimer);
+            hoverTimer = null;
           }
         });
       }
@@ -150,6 +167,10 @@ document.addEventListener("DOMContentLoaded", function () {
       slidesPerView: 3,
       speed: 500,
       spaceBetween: 0,
+      threshold: 14,
+      touchRatio: 0.72,
+      longSwipesRatio: 0.38,
+      longSwipesMs: 300,
       watchSlidesProgress: true,
       slideToClickedSlide: false,
       grabCursor: true,
