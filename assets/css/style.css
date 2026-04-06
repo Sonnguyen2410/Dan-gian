@@ -295,8 +295,8 @@ section p {
 .rule-modal__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(141, 43, 82, 0.38);
-  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(2px);
 }
 
 .rule-modal__dialog {
@@ -346,6 +346,15 @@ section p {
   border: 0;
   box-shadow: none;
   object-fit: contain;
+  opacity: 0;
+  transform: scale(0.985);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  will-change: opacity, transform;
+}
+
+#rule-modal-image.is-ready {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .rule-modal__fallback {

@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalContent = document.getElementById("rule-modal-content");
   const closeTargets = modal.querySelectorAll("[data-rule-modal-close]");
   let swiper = null;
+  const imagePreloadCache = new Map();
 
   const backImageByGame = {
     "Ô Ăn Quan": "../MẶT SAU/MẶT SAU/Ô ĂN QUAN.png",
@@ -37,35 +38,70 @@ document.addEventListener("DOMContentLoaded", function () {
     "Thả đỉa ba ba": "../MẶT SAU/MẶT SAU/THẢ ĐỈA BA BA.png",
   };
 
+  const preloadImage = (src) => {
+    if (!src) {
+      return Promise.resolve();
+    }
+
+    if (imagePreloadCache.has(src)) {
+      return imagePreloadCache.get(src);
+    }
+
+    const preloadTask = new Promise((resolve) => {
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = src;
+    });
+
+    imagePreloadCache.set(src, preloadTask);
+    return preloadTask;
+  };
+
+  const primeBackImages = () => {
+    const sources = Object.values(backImageByGame);
+    sources.forEach((src) => {
+      preloadImage(src);
+    });
+  };
+
   const openModal = (card) => {
     const cardImage = card.querySelector(".rule-image");
     const gameName = (cardImage && cardImage.alt ? cardImage.alt.trim() : "") || card.dataset.title || "Chi tiet luat choi";
     const backImagePath = backImageByGame[gameName];
 
     modalTitle.textContent = gameName;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
 
     if (modalImage) {
       modalImage.alt = `Mat sau the luat choi ${gameName}`;
 
       if (backImagePath) {
+        modalImage.classList.remove("is-ready");
         modalImage.src = backImagePath;
         modalImage.hidden = false;
         modalContent.hidden = true;
+
+        preloadImage(backImagePath).then(() => {
+          if (modalImage.src.includes(backImagePath)) {
+            modalImage.classList.add("is-ready");
+          }
+        });
       } else {
         modalImage.removeAttribute("src");
+        modalImage.classList.remove("is-ready");
         modalImage.hidden = true;
         modalContent.textContent = card.dataset.detail || "Chua co anh mat sau cho the nay.";
         modalContent.hidden = false;
       }
     }
-
-    modal.hidden = false;
-    document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
     if (modalImage) {
-      modalImage.removeAttribute("src");
+      modalImage.classList.remove("is-ready");
     }
     modal.hidden = true;
     document.body.style.overflow = "";
@@ -133,6 +169,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     bindCardActions();
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(() => {
+        primeBackImages();
+      });
+    } else {
+      setTimeout(() => {
+        primeBackImages();
+      }, 700);
+    }
 
     window.addEventListener("load", () => {
       swiper.update();
