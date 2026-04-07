@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="../typo web.png" />
-    <title>Dan Gian - Phan loai</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="../assets/css/style.css?v=20260407-65" />
+    <title>Dan Gian - Giai dieu</title>
+    <link rel="stylesheet" href="../assets/css/style.css?v=20260407-64" />
   </head>
   <body>
     <header class="site-header">
@@ -22,29 +21,48 @@
       </div>
     </header>
 
-    <main class="container page-main collection-page">
-      <section class="collection-landing">
-        <div class="collection-heading">
-          <h2>Bộ sưu tập trò chơi dân gian</h2>
-          <p>Chọn một thư mục để khám phá kho tư liệu trò chơi dân gian theo chủ đề.</p>
-        </div>
-        <div class="collection-folder-grid">
-          <a class="collection-folder-card" href="phan-loai-giai-dieu.html" aria-label="Nhóm Giai điệu">
-            <img class="collection-folder-card__bg" src="../THẺ PHÂN LOẠI/4 CÁI TIÊU ĐỀ/NHÓM GIAI ĐIỆU.png" alt="Danh mục Giai điệu" loading="lazy" />
-            <p class="collection-folder-card__desc">Nhóm các trò chơi mà lời hát và nhịp điệu là yếu tố dẫn dắt chính, giúp trẻ phát triển ngôn ngữ và khả năng cảm thụ âm nhạc.</p>
-          </a>
-          <a class="collection-folder-card" href="phan-loai-tin-nguong.html" aria-label="Nhóm Tín ngưỡng">
-            <img class="collection-folder-card__bg" src="../THẺ PHÂN LOẠI/4 CÁI TIÊU ĐỀ/NHÓM TÍN NGƯỠNG.png" alt="Danh mục Tín ngưỡng" loading="lazy" />
-            <p class="collection-folder-card__desc">Các trò chơi thường gắn liền với phong tục thờ cúng, cầu may mắn và là linh hồn của các buổi hội làng.</p>
-          </a>
-          <a class="collection-folder-card" href="phan-loai-tri-tue.html" aria-label="Nhóm Trí tuệ">
-            <img class="collection-folder-card__bg" src="../THẺ PHÂN LOẠI/4 CÁI TIÊU ĐỀ/NHÓM TRÍ TUỆ.png" alt="Danh mục Trí tuệ" loading="lazy" />
-            <p class="collection-folder-card__desc">Nơi người chơi thể hiện khả năng tính toán, tư duy chiến thuật và sự tỉ mỉ, kiên nhẫn của đôi bàn tay.</p>
-          </a>
-          <a class="collection-folder-card" href="phan-loai-van-dong.html" aria-label="Nhóm Vận động">
-            <img class="collection-folder-card__bg" src="../THẺ PHÂN LOẠI/4 CÁI TIÊU ĐỀ/NHÓM VẬN ĐỘNG.png" alt="Danh mục Vận động" loading="lazy" />
-            <p class="collection-folder-card__desc">Tập trung vào các hoạt động tiêu hao năng lượng, giúp rèn luyện sức bền, tốc độ và sự dẻo dai cho cơ thể.</p>
-          </a>
+    <main class="container page-main melody-page" data-melody-flashcard-page>
+      <section class="melody-flashcard-section" aria-labelledby="melody-flashcard-title">
+        <div class="melody-flashcard-shell">
+          <a class="melody-flashcard-back" href="phan-loai.html">Quay lại Thư Quán</a>
+
+          <header class="melody-flashcard-heading">
+            <h2 id="melody-flashcard-title">Giai điệu Trò chơi dân gian</h2>
+            <p class="melody-flashcard-intro">
+              Chạm vào thẻ để lật xem tên giai điệu và mô tả ngắn.
+            </p>
+          </header>
+
+          <div class="melody-flashcard-stage">
+            <button
+              type="button"
+              class="melody-flashcard"
+              data-melody-card
+              aria-label="Xem chi tiết giai điệu"
+            >
+              <div class="melody-flashcard__inner" data-melody-card-inner>
+                <div class="melody-flashcard__face melody-flashcard__face--front">
+                  <img data-melody-card-image src="" alt="" />
+                </div>
+
+                <div class="melody-flashcard__face melody-flashcard__face--back">
+                  <img data-melody-card-back-image src="" alt="" />
+                </div>
+              </div>
+            </button>
+          </div>
+
+          <div class="melody-flashcard-nav" aria-label="Điều hướng giai điệu">
+            <button type="button" class="melody-nav-btn" data-melody-prev>
+              <span aria-hidden="true">←</span>
+              <span>Giai điệu trước</span>
+            </button>
+
+            <button type="button" class="melody-nav-btn melody-nav-btn--next" data-melody-next>
+              <span>Giai điệu sau</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
         </div>
       </section>
     </main>
@@ -71,22 +89,18 @@
         <form class="support-modal__form" data-support-form>
           <label for="support-name">Họ tên:</label>
           <input id="support-name" name="name" type="text" required />
-
           <label for="support-phone">Số điện thoại:</label>
           <input id="support-phone" name="phone" type="tel" required />
-
           <label for="support-email">Email:</label>
           <input id="support-email" name="email" type="email" required />
-
           <label for="support-message">Hãy để lại lời nhắn cho chúng mình:</label>
           <textarea id="support-message" name="message" rows="4" required></textarea>
-
           <button type="submit" class="support-modal__submit">Gửi</button>
           <p class="support-modal__success" data-support-success hidden>Gửi thông tin thành công. Cảm ơn bạn đã liên hệ!</p>
         </form>
       </div>
     </div>
 
-    <script src="../assets/js/main.js?v=20260407-23"></script>
+    <script src="../assets/js/main.js?v=20260407-25"></script>
   </body>
 </html>
