@@ -252,7 +252,7 @@ function initOanTuTiGame() {
   const gameOverMessage = document.getElementById("game-over-message");
 
   const playerCards = Array.from(game.querySelectorAll(".choice-card"));
-  const cardBack = "../oan tu xi/cardback.jpg";
+  const cardBack = "../oan tu xi/cardback.png";
   const cardByChoice = {
     keo: "../oan tu xi/keo.png",
     bua: "../oan tu xi/bua.png",
@@ -522,8 +522,70 @@ function initOriginTimelineHalfFlow() {
   });
 }
 
+function initSupportModal() {
+  const modal = document.querySelector("[data-support-modal]");
+
+  if (!modal) {
+    return;
+  }
+
+  const openButtons = Array.from(document.querySelectorAll("[data-support-open]"));
+  const closeButtons = Array.from(modal.querySelectorAll("[data-support-close]"));
+  const form = modal.querySelector("[data-support-form]");
+  const successMessage = modal.querySelector("[data-support-success]");
+
+  const openModal = () => {
+    modal.hidden = false;
+    if (successMessage) {
+      successMessage.hidden = true;
+    }
+  };
+
+  const closeModal = () => {
+    modal.hidden = true;
+  };
+
+  openButtons.forEach((button) => {
+    button.addEventListener("click", openModal);
+  });
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", closeModal);
+  });
+
+  modal.addEventListener("click", (event) => {
+    const closeButton = event.target.closest("[data-support-close]");
+
+    if (closeButton) {
+      closeModal();
+      return;
+    }
+
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.hidden) {
+      closeModal();
+    }
+  });
+
+  if (form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (successMessage) {
+        successMessage.hidden = false;
+      }
+      form.reset();
+    });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   initRulesCarousel();
   initOanTuTiGame();
   initOriginTimelineHalfFlow();
+  initSupportModal();
 });

@@ -12,11 +12,11 @@
       <div class="container">
         <h1><a href="../index.html" aria-label="Về trang chủ"><img class="site-logo" src="../typo web.png" alt="Dân gian" /></a></h1>
         <nav class="site-nav" aria-label="Điều hướng chính">
-          <a href="../index.html">Trang chủ</a>
-          <a href="goc-tich.html" class="active">Gốc tích</a>
-          <a href="phan-loai.html">Phân loại</a>
-          <a href="luat-choi.html">Luật chơi</a>
-          <a href="trai-nghiem.html">Trải nghiệm</a>
+          <a href="../index.html">Trang chủ<br /><small>Đình Làng</small></a>
+          <a href="goc-tich.html" class="active">Giới thiệu chung<br /><small>Gốc Tích</small></a>
+          <a href="phan-loai.html">Bộ sưu tập<br /><small>Thư Quán</small></a>
+          <a href="luat-choi.html">Luật chơi<br /><small>Lệ Làng</small></a>
+          <a href="trai-nghiem.html">Trải nghiệm<br /><small>Thân hành</small></a>
         </nav>
       </div>
     </header>
@@ -118,10 +118,42 @@
 
     <footer class="site-footer">
       <div class="container">
-        <p>© 2026 Dan Gian</p>
+        <h3>LIÊN HỆ - HỖ TRỢ</h3>
+        <p class="site-footer__label">THÔNG TIN LIÊN HỆ</p>
+        <ul class="site-footer__list">
+          <li>Thành viên nhóm: Ngân Nhạn - Nhật Duy - Ngọc Điệp - Xuân Thắm</li>
+          <li>Mail: nguyenngannhan2110@gmail.com</li>
+          <li>Địa chỉ: 10 - 12 Đinh Tiên Hoàng, phường Sài Gòn, TP. HCM</li>
+          <li>Số điện thoại: +84 916 684 546</li>
+        </ul>
+        <button type="button" class="site-footer__support-btn" data-support-open>Hỗ trợ</button>
       </div>
     </footer>
 
-    <script src="../assets/js/main.js?v=20260407-03"></script>
+    <div class="support-modal" data-support-modal hidden>
+      <div class="support-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="support-modal-title">
+        <button type="button" class="support-modal__close" aria-label="Đóng" data-support-close>&times;</button>
+        <h3 id="support-modal-title">HỖ TRỢ</h3>
+        <p>Trong trường hợp cần được hỗ trợ hoặc muốn đóng góp cho dự án, mời bạn điền các thông tin dưới đây để được hỗ trợ trong thời gian sớm nhất. Nhóm xin chân thành cảm ơn bạn!</p>
+        <form class="support-modal__form" data-support-form>
+          <label for="support-name">Họ tên:</label>
+          <input id="support-name" name="name" type="text" required />
+
+          <label for="support-phone">Số điện thoại:</label>
+          <input id="support-phone" name="phone" type="tel" required />
+
+          <label for="support-email">Email:</label>
+          <input id="support-email" name="email" type="email" required />
+
+          <label for="support-message">Hãy để lại lời nhắn cho chúng mình:</label>
+          <textarea id="support-message" name="message" rows="4" required></textarea>
+
+          <button type="submit" class="support-modal__submit">Gửi</button>
+          <p class="support-modal__success" data-support-success hidden>Gửi thông tin thành công. Cảm ơn bạn đã liên hệ!</p>
+        </form>
+      </div>
+    </div>
+
+    <script src="../assets/js/main.js?v=20260407-10"></script>
   </body>
 </html>
