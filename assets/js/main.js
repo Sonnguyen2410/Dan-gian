@@ -253,6 +253,8 @@ function initOanTuTiGame() {
 
   const playerCards = Array.from(game.querySelectorAll(".choice-card"));
   const cardBack = "../oan tu xi/cardback.png";
+  const defaultDuelUserCard = duelUserCardEl.getAttribute("src") || cardBack;
+  const defaultDuelCpuCard = duelCpuCardEl.getAttribute("src") || cardBack;
   const cardByChoice = {
     keo: "../oan tu xi/keo.png",
     bua: "../oan tu xi/bua.png",
@@ -297,8 +299,8 @@ function initOanTuTiGame() {
     });
     duelUserWrap.classList.remove("is-flipping");
     duelCpuWrap.classList.remove("is-flipping");
-    duelUserCardEl.src = cardBack;
-    duelCpuCardEl.src = cardBack;
+    duelUserCardEl.src = defaultDuelUserCard;
+    duelCpuCardEl.src = defaultDuelCpuCard;
   }
 
   function updateScoreUI() {
@@ -1031,19 +1033,19 @@ function initClassificationFlashcardPages() {
   const flashcardGroups = {
     "tin-nguong": {
       title: "Tín ngưỡng Trò chơi dân gian",
-      intro: "Chạm vào thẻ để lật xem hình minh họa và ảnh chữ tương ứng.",
+      intro: "Chạm vào thẻ để lật xem mô tả.",
       frontImages: [61, 63, 65, 67, 69, 71, 73, 75, 77, 79].map((number) => `../THẺ PHÂN LOẠI/TÍN NGƯỠNG/HÌNH/${number}.png`),
       backImages: [62, 64, 66, 68, 70, 72, 74, 76, 78, 80].map((number) => `../THẺ PHÂN LOẠI/TÍN NGƯỠNG/CHỮ/${number}.png`),
     },
     "tri-tue": {
       title: "Trí tuệ Trò chơi dân gian",
-      intro: "Chạm vào thẻ để lật xem hình minh họa và ảnh chữ tương ứng.",
+      intro: "Chạm vào thẻ để lật xem mô tả.",
       frontImages: [41, 43, 45, 47, 49, 51, 53, 55, 57, 59].map((number) => `../THẺ PHÂN LOẠI/TRÍ TUỆ/HÌNH/${number}.png`),
       backImages: [42, 44, 46, 48, 50, 52, 54, 56, 58, 60].map((number) => `../THẺ PHÂN LOẠI/TRÍ TUỆ/CHỮ/${number}.png`),
     },
     "van-dong": {
       title: "Vận động Trò chơi dân gian",
-      intro: "Chạm vào thẻ để lật xem hình minh họa và ảnh chữ tương ứng.",
+      intro: "Chạm vào thẻ để lật xem mô tả.",
       frontImages: [
         "GD10.png",
         "GD10 (3).png",
